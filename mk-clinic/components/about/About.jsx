@@ -9,7 +9,7 @@ export default function About(){
             
             
                 <p className="indent-8">
-                Bienvenue au cabinet dentaire  dirigé par le Dr. Malek Kamel Eddine spécialiste en parodontologie, ancien maître assistant à l'Université de Sidi Belabbas. Situé au sein d'un groupe médical, notre cabinet offre une gamme complète de traitements dentaires, y compris des interventions chirurgicales telles que l'extraction des dents de sagesse et l'implantologie. Nous sommes dévoués à la santé bucco-dentaire globale de nos patients, en leur offrant des soins personnalisés dans un environnement moderne et accueillant. Faites confiance à notre équipe expérimentée pour des soins dentaires de qualité supérieure.
+                Bienvenue au cabinet dentaire  dirigé par le Dr. Malek Kamel Eddine spécialiste en parodontologie, ancien maître assistant à l'Université de Sidi Belabbas.Notre cabinet offre une gamme complète de traitements dentaires, y compris des interventions chirurgicales telles que l'extraction des dents de sagesse et l'implantologie. Nous sommes un groupe medicale dévoués à la santé bucco-dentaire globale de nos patients, en leur offrant des soins personnalisés dans un environnement moderne et accueillant. Faites confiance à notre équipe expérimentée pour des soins dentaires de qualité supérieure.
                 </p>
             </div>
 
