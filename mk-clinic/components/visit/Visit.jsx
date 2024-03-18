@@ -13,7 +13,7 @@ export default function Visit(){
                 </div>
                 <div ><img className="h-2/3 w-full" src="/images/visit.jpg" alt="" /></div>
             </div>
-            <div className="mx-auto" ><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d649.9989108808061!2d0.9183779207646195!3d35.95913179010159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1283e1de75af4baf%3A0x5f0bb6d28f8b88fa!2sCabinet%20Dentaire%20De%20Groupe!5e0!3m2!1sfr!2sdz!4v1710367787144!5m2!1sfr!2sdz" width="600" height="450" style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+            <div className="mx-auto max-w-full overflow-x-auto"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d649.9989108808061!2d0.9183779207646195!3d35.95913179010159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1283e1de75af4baf%3A0x5f0bb6d28f8b88fa!2sCabinet%20Dentaire%20De%20Groupe!5e0!3m2!1sfr!2sdz!4v1710367787144!5m2!1sfr!2sdz" width="600" height="450" style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
         </div>
         </>
     )
