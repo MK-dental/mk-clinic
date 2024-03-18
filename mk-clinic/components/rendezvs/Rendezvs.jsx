@@ -3,11 +3,11 @@ import React, {useEffect, useRef,useState } from "react";
 import Link from "next/link";
 export default function Rendezvs(){
   const[listopen,setListopen]=useState(false);
-  const[autreoption,setAutreoption]=useState(null);
+  const[autreoption,setAutreoption]=useState("");
   const handleclick=()=>{
     setListopen(!listopen)
   }
-  const[option,setOption]=useState(null)
+  const[option,setOption]=useState("")
   const dropdownRef = useRef(null);
   const options=[
     "consultation periodique", "douleur dentaire","prothese","fracture dentaire",
@@ -59,7 +59,14 @@ export default function Rendezvs(){
     </div>
     <div className={`m-4 h-1/2  bg-white border ${option==="Autre -->"? "block":"hidden" }`} ><input className="outline-none" required type="text" value={autreoption} onChange={(e)=>setAutreoption(e.target.value)} placeholder="ecrivez ici ..." /></div>
     
-        <button className="absolute my-6 right-0 p-2 text-xl xl:text-2xl text-[#10217D] border border-[#10217D] rounded-xl"> <Link href="/form">Next</Link></button>
+    <button disabled={option === "" || (option === "Autre -->" && autreoption === "")} type="submit" className="absolute my-6 right-0 p-2 text-xl xl:text-2xl text-[#10217D] border border-[#10217D] rounded-xl">
+      {option === "" || (option === "Autre -->" && autreoption === "") ? (
+        <span>Next</span> // Render a span instead of Link if the button is disabled
+      ) : (
+        <Link href="/form">Next</Link> // Render Link if the button is enabled
+      )}
+    </button>
+
         
   </div>
         </>
