@@ -18,18 +18,7 @@ export default function Rendezvs(){
     "Autre -->"
    
     ]
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setListopen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  
     return(
         <>
          <div className=" relative w-1/2 h-1/3 bg-white p-6 border">
@@ -41,7 +30,7 @@ export default function Rendezvs(){
     
     <div className="flex h-1/2 items-center justify-center gap-2 ">
       <div className="w-1/2 p-4 flex items-center justify-center border ">j'ai besoin d'une consultation pour</div>
-      <div ref={dropdownRef}
+      <div 
        onClick={handleclick}  className=" relative w-1/2 p-4 flex  flex-row items-center justify-between border hover:border-gray-500 rounded shadow leading-tight focus:outline-none focus:border-gray-500 cursor-pointer ">
  <div>{option ? option : "Selectionnez votre motif de consultation"}</div>
  <div className=""><svg width="34px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

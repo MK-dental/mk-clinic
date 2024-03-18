@@ -16,10 +16,10 @@ export default function Hero (){
      
    </div>
    <div className="flex flex-col  lg:flex-row lg:h-1/2 items-center justify-center gap-2 ">
-      <div className="lg:w-1/2 p-4 flex items-center justify-center border text-xs "><span>Appelez 0772 30 82 96</span></div>
+      <div className="lg:w-1/2 p-4 flex items-center justify-center border text-xs lg:text-base "><span>Appelez 0772 30 82 96</span></div>
        
           <span>ou</span>
-          <button className="bg-[#10217D] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-xs">
+          <button className="bg-[#10217D] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-xs lg:text-base">
            <Link href="/Rendezvs">Prenez un Rendez-vs</Link> 
           </button>
       </div>

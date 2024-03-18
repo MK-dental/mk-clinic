@@ -1,11 +1,11 @@
 export default function About(){
     return (
         <>
-        <div className="h-screen flex flex-col p-20">
+        <div className=" h-full lg:h-screen flex flex-col p-4 lg:p-20">
         <h1 className="text-[#10217D] text-3xl font-bold mb-6 ">A propos</h1>
         <div className="w-full  flex  flex-col md:flex-row  justify-between items-center md:gap-12 text-sm  font-semibold xl:text-xl 2xl:text-2xl  lg:gap-24 ">
             
-            <div className=" w-full md:w-1/2 ">
+            <div className="mb-6 w-full md:w-1/2 ">
             
             
                 <p className="indent-8">
