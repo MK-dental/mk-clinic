@@ -12,7 +12,7 @@ const Navbar = () => {
       <div className=" px-4 flex h-16 justify-between items-center  filter backdrop-blur-lg">
       
       <div className="justify-center content-center">
-          <img src="/images/logo.png" alt="logo" height="100" width="100" />
+         <Link href="/"><img src="/images/logo.png" alt="logo" height="100" width="100" /></Link> 
         </div>
            <div>
            <ul className=" hidden  md:text-xs font-normal lg:text-base lg:font-semibold md:flex md:flex-row md:justify-between items-center md:gap-4 lg:gap-12">
@@ -20,7 +20,7 @@ const Navbar = () => {
             <li className="hover:text-blue-500"><Link href="/">Services</Link></li>
             <li className="hover:text-blue-500"><Link href="/">Galerie</Link></li>
             <li className=" hover:text-blue-500"><Link href="/">À propos</Link></li>
-            <li className="p-2 hover:text-blue-500"><Link href="/">login</Link></li>
+            <li className="p-2 hover:text-blue-500"><Link href="/Signin">login</Link></li>
           </ul>
            </div>
          
