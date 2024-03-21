@@ -5,11 +5,27 @@ import Link from 'next/link';
 
 import {createClient} from '../utils/supabase/server-props'
 
-export default function Dashboard({ user }: { user: User }) {
-  const supabase = createClient;
-  async function signOut() {
-    const { error } = await supabase.auth.signOut()
-  }
+export default function Dashboard({ user }: { user: User  }) {
+  const handleSignOut = async () => {
+    try {
+      const response = await fetch('/api/auth/signout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        // Redirect or perform any other action after successful sign-out
+        window.location.href = '/'; // Redirect to home page for example
+      } else {
+        console.error('Failed to sign out:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error signing out:', error.message);
+    }
+  };
+
     useEffect(() => {
         const menuButton = document.getElementById('menu-button');
         const sidebar = document.getElementById('sidebar');
@@ -86,10 +102,10 @@ export default function Dashboard({ user }: { user: User }) {
         </Link>
      
      
-        <Link href="#"className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-500 group">
+        <div onClick={handleSignOut} className="cursor-pointer px-4 py-3 flex items-center space-x-4 rounded-md text-gray-500 group">
           <i className="fas fa-sign-out-alt"></i>
-          <span>Cerrar sesión</span>
-        </Link>
+          <span>logout</span>
+        </div>
      
     </div>
   </div>
@@ -152,6 +168,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       user: data.user,
+      
     },
     
   }

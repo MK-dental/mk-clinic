@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useRouter } from 'next/router'
 
-import { createClient } from '@/utils/supabase/component'
+import { createClient } from '../../utils/supabase/component'
 export default function Signup(){
    
     
