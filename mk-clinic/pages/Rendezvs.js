@@ -1,4 +1,4 @@
-import Rendezvs from "@/components/rendezvs/Rendezvs"
+import Rendezvs from "../components/rendezvs/Rendezvs"
 export default function Temps(){
     return(
         <>
