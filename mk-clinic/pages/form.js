@@ -1,4 +1,4 @@
-import Form from "@/components/rendezvs/form";
+import Form from "../components/rendezvs/form";
 
 export default function form(){
     return(

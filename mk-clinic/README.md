@@ -3,6 +3,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 First, run the development server:
+ <script async defer src="https://buttons.github.io/buttons.js"></script>
+       <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
 
 ```bash
 npm run dev
