@@ -1,9 +1,9 @@
 import React from 'react'
 import Sidebar from '../dashboard/Sidebar'
 
-export const Adminlayout = ({ children ,user}) => {
+export const Adminlayout = ({ children,user}) => {
   return (
-    <div className="flex overflow-hidden bg-white ">
+    <div className="flex flex-col overflow-hidden bg-white ">
         <Sidebar user={user}></Sidebar>
           <div className="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
           <div id="main-content" className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
@@ -13,7 +13,7 @@ export const Adminlayout = ({ children ,user}) => {
         </div>
         </main>
         </div>
-        <footer className="bg-white md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4">
+        <footer className="bg-white md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4  lg:ml-64">
                 <ul className="flex items-center flex-wrap mb-6 md:mb-0">
                    <li><a href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Terms and conditions</a></li>
                    <li><a href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Privacy Policy</a></li>

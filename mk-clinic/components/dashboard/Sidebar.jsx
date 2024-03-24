@@ -1,4 +1,4 @@
-import React, { useState} from 'react'; // Import useEffect
+import React, { useEffect, useState} from 'react'; // Import useEffect
 import Link from 'next/link';
 import { MdOutlineHistory } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
@@ -10,20 +10,21 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import { RiUserFill } from "react-icons/ri";
 import Signout from '../auth/Signout';
 
-
-export default function Sidebar({ user }) {
+export default function Sidebar({user}) {
   // Initialize user state
-
+  
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+    const [useremail,setUseremail]=useState("");
     const toggleSidebar = () => {
       setIsSidebarOpen(!isSidebarOpen);
     };
-
+    useEffect(() => {
+      const userEmail = user ? user.email : 'User';
+          setUseremail(userEmail); // Set user email in state
+          console.log('User:', userEmail);
+       }, [user]);
   
-
-   const userEmail = user ? user.email : 'User';
-  
+      
     return (
       <div>
       
@@ -75,7 +76,7 @@ export default function Sidebar({ user }) {
                     <li>
                       <div className="text-base text-gray-900 font-normal rounded-lg flex items-center px-2 py-4 border-b  hover:bg-gray-100 group">
                         <RiUserFill />
-                        <span className="ml-3 text-sm font-semibold">{userEmail}!</span>
+                        <span className="ml-3 text-sm font-semibold">{useremail}!</span>
                       </div>
                     </li>
                     <li>

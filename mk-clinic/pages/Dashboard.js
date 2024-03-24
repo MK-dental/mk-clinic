@@ -10,10 +10,10 @@ import { IoMdSettings } from "react-icons/io";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { RiUserFill } from "react-icons/ri";
 import Signout from '../components/auth/Signout';
-import createClient from '../utils/supabase/server-props'; // Corrected import statement
+// Corrected import statement
 
 
-export default function Dashboard({ user }) {
+export default function Dashboard( ) {
    const components=[
      "Today" ,
    ]
@@ -31,7 +31,7 @@ export default function Dashboard({ user }) {
   <>
      
          
-                         <div className="flex items-center justify-between mb-4">
+                         <div >
                             
                            dashboard
                          </div>
@@ -45,27 +45,6 @@ export default function Dashboard({ user }) {
  ) 
 }
 
-export async function getServerSideProps(context) {
-  const supabase = createClient(context)
 
-  const { data, error } = await supabase.auth.getUser()
-
-  if (error || !data) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: {
-      user: data.user,
-      
-    },
-    
-  }
-}
 
 

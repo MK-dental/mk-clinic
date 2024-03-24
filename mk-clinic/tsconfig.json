@@ -21,7 +21,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "utils/supabase/server-props.js", "pages/Dashboard.js"  ],
+, "utils/supabase/server-props.ts", "pages/Dashboard.js", "components/dashboard/Sidebar.jsx"  ],
   "exclude": [
     "node_modules"
   ]
