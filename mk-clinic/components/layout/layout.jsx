@@ -8,8 +8,8 @@ const Layout = ({ children }) => {
   return (
     <div >
       <Head>
-        <title>Your Website Title</title>
-        <meta name="description" content="Your website description" />
+        <title>MK Clinic</title>
+        <meta name="description" content="it is a website for Malek kamel eddine dental clinic" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
