@@ -28,7 +28,7 @@ const Navbar = () => {
           <span>Appelez 0772 30 82 96</span>
           <span>ou</span>
           <button className="bg-[#10217D] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-            Prenez un Rendez-vs
+           <Link   href="/Rendezvs" > Prenez un Rendez-vs </Link>
           </button>
        
           

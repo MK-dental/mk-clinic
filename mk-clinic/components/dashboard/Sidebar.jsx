@@ -9,20 +9,46 @@ import { IoMdSettings } from "react-icons/io";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { RiUserFill } from "react-icons/ri";
 import Signout from '../auth/Signout';
-
-export default function Sidebar({user}) {
+import {createClient}   from '../../utils/supabase/component';
+import { SupabaseClient } from '@supabase/supabase-js';
+export default function Sidebar() {
   // Initialize user state
-  
+  const supabase = createClient();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [useremail,setUseremail]=useState("");
     const toggleSidebar = () => {
       setIsSidebarOpen(!isSidebarOpen);
     };
+    
     useEffect(() => {
-      const userEmail = user ? user.email : 'User';
-          setUseremail(userEmail); // Set user email in state
-          console.log('User:', userEmail);
-       }, [user]);
+      const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+        console.log(event, session);
+  
+        if (event === 'INITIAL_SESSION') {
+          // handle initial session, if necessary
+        } else if (event === 'SIGNED_IN') {
+          // handle sign in event
+          const user = session.user;
+          const userEmail = user.email;
+          setUseremail(userEmail)
+          console.log('Signed in user email:', userEmail);
+          // You can use userEmail as needed
+        } else if (event === 'SIGNED_OUT') {
+          // handle sign out event, if necessary
+        } else if (event === 'PASSWORD_RECOVERY') {
+          // handle password recovery event, if necessary
+        } else if (event === 'TOKEN_REFRESHED') {
+          // handle token refreshed event, if necessary
+        } else if (event === 'USER_UPDATED') {
+          // handle user updated event, if necessary
+        }
+      });
+  
+      return () => {
+        authListener.subscription.unsubscribe();
+      };
+    }, []);
+   
   
       
     return (
@@ -48,7 +74,7 @@ export default function Sidebar({user}) {
                               <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                             </svg>
                           </div>
-                          <input type="text" name="email" id="mobile-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-600 focus:ring-cyan-600 block w-full pl-10 p-2.5" placeholder="Search"/>
+                          <input type="text" name="email" id="mobile-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-600 block w-full pl-10 p-2.5" placeholder="Search"/>
                         </div>
                       </form>
                     </li>
@@ -76,7 +102,7 @@ export default function Sidebar({user}) {
                     <li>
                       <div className="text-base text-gray-900 font-normal rounded-lg flex items-center px-2 py-4 border-b  hover:bg-gray-100 group">
                         <RiUserFill />
-                        <span className="ml-3 text-sm font-semibold">{useremail}!</span>
+                        <span className="ml-3 text-sm font-semibold">{useremail}</span>
                       </div>
                     </li>
                     <li>

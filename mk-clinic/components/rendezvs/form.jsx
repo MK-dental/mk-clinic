@@ -1,8 +1,9 @@
 import Link from "next/link"
-export default function Form(){
+export default function Form({onPrevClick,onNextClick}){
     return(
        <>
        <div className="flex flex-col justify-center items-center w-full h-full">
+        <h1 className="text-[#10217D] font-bold text-lg my-6">Rempli la forme suivante:</h1>
        <div className=" m-6 bg-white w-1/2 h-full grid grid-cols-2 text-[#10217D] font-semibold  gap-4">
 
        <div className="h-full flex flex-col justify-start items-start gap-6"><h1 className=" justify-start text-nowrap" >Votre Nom :</h1>
@@ -25,9 +26,20 @@ export default function Form(){
        
        
        
-       
-        <div  className="flex justify-end w-screen"> <button className=" p-2 text-xl xl:text-2xl text-[#10217D] border border-[#10217D] rounded-xl"> <Link href="/form">Next</Link></button> </div>
+
        </div>
+       <div className="  w-1/2 flex flex-row justify-between ">   
+<button onClick={onPrevClick}  type="submit" className=" my-6 w-24 p-2 text-xl xl:text-2xl text-[#10217D] border border-[#10217D] rounded-xl">
+     
+        <span >previous</span> 
+     
+    </button>
+    <button onClick={onNextClick}  type="submit" className=" my-6 w-24  p-2 text-xl xl:text-2xl text-[#10217D] border border-[#10217D] rounded-xl">
+     
+        <span >Next</span> 
+     
+    </button>
+    </div>
        </div>
        </>
     )

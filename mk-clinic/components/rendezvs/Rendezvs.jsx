@@ -1,14 +1,64 @@
 
 import React, {useEffect, useRef,useState } from "react";
 import Link from "next/link";
-export default function Rendezvs(){
+import { createClient } from "../../utils/supabase/component";
+export default function Rendezvs({onNextClick,onDataChange}){
   const[listopen,setListopen]=useState(false);
   const[autreoption,setAutreoption]=useState("");
+  const [data, setData] = useState({});
+
+
+  const[option,setOption]=useState("");
+  
+  
   const handleclick=()=>{
     setListopen(!listopen)
   }
-  const[option,setOption]=useState("")
-  const dropdownRef = useRef(null);
+  const handleChange = (value) => {
+   
+    setData({ ...data, "motif": value });
+    onDataChange(data);
+  };
+  
+
+//  const handleNext=async () => {
+ 
+//       try {
+//         // Insert data into 'rendezvs' table
+//         const supabase=createClient();
+//         const { data: insertData, error: insertError } = await supabase
+//           .from('rendezvs')
+//           .insert([
+//             { motif: {option} },
+//           ]);
+  
+//         if (insertError) {
+//           console.error('Error inserting data:', insertError.message);
+//           return;
+//         }
+  
+//         // Access the id of the inserted document
+//         const insertedId = insertData[0]?.id;
+//         setInsertedId(id);
+//         console.log('Data inserted with id:', insertedId);
+  
+//         // Select all data from 'rendezvs' table
+//         const { data: selectData, error: selectError } = await supabase
+//           .from('rendezvs')
+//           .select();
+  
+//         if (selectError) {
+//           console.error('Error selecting data:', selectError.message);
+//           return;
+//         }
+  
+//         console.log('Selected data:', selectData);
+//       } catch (error) {
+//         console.error('Error:', error.message);
+//       }
+    
+//   }
+        
   const options=[
     "consultation periodique", "douleur dentaire","prothese","fracture dentaire",
     "tartre",
@@ -38,7 +88,7 @@ export default function Rendezvs(){
 </svg></div>
 <div  className={` text-gray-500 text-sm absolute right-0 top-20 bg-white w-full rounded-md p-4 overflow-scroll z-30 ${listopen? "block":"hidden" }`}>
   <ul >
-  { options.map(option=> <li onClick={()=>setOption(option)} className="p-2 hover:bg-gray-100 cursor-pointer">{option} </li>
+  { options.map(option=> <li onClick={()=>{setOption(option);handleChange(option)}} className="p-2 hover:bg-gray-100 cursor-pointer">{option} </li>
     
 )}
   </ul>
@@ -48,12 +98,12 @@ export default function Rendezvs(){
     </div>
     <div className={`m-4 h-1/2  bg-white border ${option==="Autre -->"? "block":"hidden" }`} ><input className="outline-none" required type="text" value={autreoption} onChange={(e)=>setAutreoption(e.target.value)} placeholder="ecrivez ici ..." /></div>
     
-    <button disabled={option === "" || (option === "Autre -->" && autreoption === "")} type="submit" className="absolute my-6 right-0 p-2 text-xl xl:text-2xl text-[#10217D] border border-[#10217D] rounded-xl">
-      {option === "" || (option === "Autre -->" && autreoption === "") ? (
-        <span>Next</span> // Render a span instead of Link if the button is disabled
-      ) : (
-        <Link href="/form">Next</Link> // Render Link if the button is enabled
-      )}
+    <button onClick={onNextClick} disabled={option === "" || (option === "Autre -->" && autreoption === "")} type="submit" className="absolute my-6 right-0 p-2 text-xl xl:text-2xl text-[#10217D] border border-[#10217D] rounded-xl">
+      
+        <span>Next</span> 
+      
+        
+      
     </button>
 
         
