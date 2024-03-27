@@ -16,8 +16,10 @@ export default function Rendezvs({onNextClick,onDataChange}){
   }
   const handleChange = (value) => {
    
-    setData({ ...data, "motif": value });
-    onDataChange(data);
+    const newData = { ...data, "motif": value };
+    setData(newData); // Update data state
+    onDataChange(newData);
+    
   };
   
 
@@ -84,7 +86,7 @@ export default function Rendezvs({onNextClick,onDataChange}){
        onClick={handleclick}  className=" relative w-1/2 p-4 flex  flex-row items-center justify-between border hover:border-gray-500 rounded shadow leading-tight focus:outline-none focus:border-gray-500 cursor-pointer ">
  <div>{option ? option : "Selectionnez votre motif de consultation"}</div>
  <div className=""><svg width="34px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z" fill="#000000"/>
+<path fill-rule="evenodd" clipRule="evenodd" d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z" fill="#000000"/>
 </svg></div>
 <div  className={` text-gray-500 text-sm absolute right-0 top-20 bg-white w-full rounded-md p-4 overflow-scroll z-30 ${listopen? "block":"hidden" }`}>
   <ul >

@@ -8,11 +8,11 @@ export default function Rendezvspage(){
     const [userData, setUserData] = useState({});
     const handleNextClick = (data) => {
         setUserData({ ...userData, ...data });
-        console.log("userdata:",userData.motif)
+        console.log("userdata:",userData)
         setStep(step + 1);
     }
     useEffect(() => {
-        console.log("userdata:", userData.motif);
+        console.log("userdata:", userData);
       }, [userData]);
     
   
@@ -28,7 +28,7 @@ export default function Rendezvspage(){
       };
     return(
         <>
-        < div className=" h-screen flex flex-col items-center justify-center ">
+        < div className=" h-screen w-full flex flex-col items-center justify-center ">
         {/* if the user clicked on next it will show the other component  */}
       {step === 1 && <Rendezvs onNextClick={handleNextClick} onDataChange={(data) => setUserData(data)}  />}
       {step === 2 && <Form onPrevClick={handlePrevClick} onNextClick={handleNextClick} onDataChange={(data) => setUserData(data)}  />}
