@@ -12,7 +12,7 @@ export default function Rendezvspage() {
   const [userData, setUserData] = useState({});
   const [insertedId, setInsertedId] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  
   const SendInfo = async (info) => {
     try {
       setLoading(true);
