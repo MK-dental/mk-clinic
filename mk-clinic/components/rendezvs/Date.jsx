@@ -5,7 +5,7 @@ import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
 import { createClient } from '../../utils/supabase/component';
-const Date = ({onConfirmClick,initialData}) => {
+const Date = ({onConfirmClick,initialData,onPrevClick}) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState('10:00');
   const [isWatchOpen, setIsWatchOpen] = useState(false);
@@ -66,9 +66,12 @@ const Date = ({onConfirmClick,initialData}) => {
       }
 
       if (data.length > 0) {
+        
         console.log(`Appointment already booked for ${selectedDate} at ${selectedTime}`);
-        alert('This appointment slot is already booked. Please choose another time.');
-        setAppointment(true);
+        alert("Ce temps là est déja réservé.Essayez un autre temps s'il vous plait");
+       setSelectedDate(null)
+       setSelectedTime(null)
+       
         return;
       } else {
         const userData = {
@@ -76,6 +79,7 @@ const Date = ({onConfirmClick,initialData}) => {
           date: selectedDate
         };
         const Data = { ...initialData, ...userData };
+        setAppointment(false);
         onConfirmClick(Data);
       }
       
@@ -85,11 +89,18 @@ const Date = ({onConfirmClick,initialData}) => {
   };
 
   return (
-    <div className='container mx-10 my-20'>
-      <h1 className='text-[#10217D] text-center text-2xl font-bold mb-20'>Temps et jour de Rendez-vous:</h1>
+    <div className=' mx-10 my-20'>
       
+      <h1 className='text-[#10217D] text-center text-2xl font-bold mb-20'>Temps et jour de Rendez-vous:</h1>
+    
       <div className='flex flex-col md:flex-row jsutify-center items-start h-[600px]'>
         <div className='mb-5 font-semibold md:mb-0 md:mr-10 md:w-1/3'>
+        <button
+            onClick={onPrevClick}
+            className=" mb-6 w-32 p-2 text-xl  text-[#10217D] font-normal"
+          >
+            <span>{`<-- previous`}</span>
+          </button>
         <p className="mb-5 indent-5 text-lg ">Vous pouvez sélectionnez ici le jour et l'heure de votre rendez-vous</p>
        
           {Appointment? 

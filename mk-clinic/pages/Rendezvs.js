@@ -32,7 +32,7 @@ export default function Rendezvspage() {
 
       const { data: selectData, error: selectError } = await supabase
         .from('rendezvs')
-        .select();
+        .select(insertedId);
 
       if (selectError) {
         console.error('Error selecting data:', selectError.message);
@@ -69,7 +69,7 @@ export default function Rendezvspage() {
   }, [userData]);
 
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-center">
+    <div className="h-screen mt-20 w-full flex flex-col items-center justify-center">
       {step === 1 && <Rendezvs onNextClick={handleNextClick} />}
       {step === 2 && <Form onPrevClick={handlePrevClick} onNextClick={handleNextClick} initialData={userData} />}
       {step === 3 && <Date onPrevClick={handlePrevClick} onConfirmClick={handleConfirmClick} initialData={userData} />}
