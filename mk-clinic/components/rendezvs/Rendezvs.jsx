@@ -37,9 +37,9 @@ export default function Rendezvs({onNextClick}){
   
     return(
         <>
-         <div className=" relative h-full w-full lg:w-1/2 lg:h-1/3 bg-white p-6 border">
+         <div className=" relative h-full w-full lg:w-1/2 lg:h-2/3 bg-white  border">
    
-    <div className="flex  h-1/2 items-center justify-center mb-4 border-b">
+    <div className="flex  items-center justify-center mb-4 p-12 border-b">
       <div className=" text-[#10217D] text-xl tracking-wide font-semibold  ">Prenez un Rendez-vs</div>
       
     </div>
@@ -64,7 +64,7 @@ export default function Rendezvs({onNextClick}){
     </div>
     <div className={`m-4 h-1/2  bg-white border ${option==="Autre -->"? "block":"hidden" }`} ><input className="outline-none" required type="text" value={autreoption} onChange={(e)=>setAutreoption(e.target.value)} placeholder="ecrivez ici ..." /></div>
     
-    <button onClick={onNextClick} disabled={option === "" || (option === "Autre -->" && autreoption === "")} type="submit" className="absolute my-6 right-0 p-2 text-xl xl:text-2xl text-[#10217D] border border-[#10217D] rounded-xl">
+    <button onClick={onNextClick} disabled={option === "" || (option === "Autre -->" && autreoption === "")} type="submit" className="absolute my-16 right-0 p-2 text-xl xl:text-2xl text-[#10217D] border border-[#10217D] rounded-xl">
       
         <span>Next</span> 
       

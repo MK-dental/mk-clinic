@@ -4,11 +4,13 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
-
-const Date = ({onConfirmClick,initialData}) => {
+import { createClient } from '../../utils/supabase/component';
+const Date = ({onConfirmClick,initialData,onPrevClick}) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState('10:00');
   const [isWatchOpen, setIsWatchOpen] = useState(false);
+  const [Appointment,setAppointment]=useState(false)
+  const supabase=createClient();
   useEffect(() => {
     const calendarEl = document.querySelector('.fc-daygrid');
     const openModal = () => {
@@ -40,39 +42,77 @@ const Date = ({onConfirmClick,initialData}) => {
       }
     };
   }, []);
- 
 
+ 
   const closeModal = () => {
     setIsWatchOpen(false);
   };
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
-    console.log('Selected time:', time);
   };
- const  handleChange=()=>{
-  const user = {};
- user["temps"]=selectedTime;
- user["date"]=selectedDate;
- console.log("user",user)
- const Data={...initialData,...user}
- onConfirmClick(Data);
+  const handleChange = async () => {
+    try {
+      
+      const { data, error } = await supabase
+        .from('rendezvs')
+        .select('*')
+        .eq('date', selectedDate)
+        .eq('temps', selectedTime);
 
- }
+      if (error) {
+        console.error('Error selecting data:', error.message);
+        return;
+      }
+
+      if (data.length > 0) {
+        
+        console.log(`Appointment already booked for ${selectedDate} at ${selectedTime}`);
+        alert("Ce temps là est déja réservé.Essayez un autre temps s'il vous plait");
+       setSelectedDate(null)
+       setSelectedTime(null)
+       
+        return;
+      } else {
+        const userData = {
+          temps: selectedTime,
+          date: selectedDate
+        };
+        const Data = { ...initialData, ...userData };
+        setAppointment(false);
+        onConfirmClick(Data);
+      }
+      
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
 
   return (
-    <div className='container mx-10 my-20'>
-      <h1 className='text-[#10217D] text-center text-2xl font-bold mb-20'>Temps et jour de Rendez-vous:</h1>
+    <div className=' mx-10 my-20'>
       
+      <h1 className='text-[#10217D] text-center text-2xl font-bold mb-20'>Temps et jour de Rendez-vous:</h1>
+    
       <div className='flex flex-col md:flex-row jsutify-center items-start h-[600px]'>
         <div className='mb-5 font-semibold md:mb-0 md:mr-10 md:w-1/3'>
+        <button
+            onClick={onPrevClick}
+            className=" mb-6 w-32 p-2 text-xl  text-[#10217D] font-normal"
+          >
+            <span>{`<-- previous`}</span>
+          </button>
         <p className="mb-5 indent-5 text-lg ">Vous pouvez sélectionnez ici le jour et l'heure de votre rendez-vous</p>
-        <ol>
-        <li className='mb-2'>-Selected date: {selectedDate}</li>
+       
+          {Appointment? 
+          <span>the time is booked choose another one </span>:
+          <ol>
+          <li className='mb-2'>-Selected date: {selectedDate}</li>
           <li className='mb-2'>-Selected time: {selectedTime}</li>
         </ol>
+            }
+        
         <div className='flex justify-center '>
- <button onClick={()=>{handleChange();onConfirmClick()}}  type="submit" className=" my-6 w-50  p-2 text-base xl:text-xl text-green-500 border border-green-600 hover:text-green-300  rounded-xl">
+ <button onClick={()=>handleChange()} disabled={Appointment} type="submit" className=" my-6 w-50  p-2 text-base xl:text-xl text-green-500 border border-green-600 hover:text-green-300  rounded-xl">
      
      <span >Confirmer</span> 
   
