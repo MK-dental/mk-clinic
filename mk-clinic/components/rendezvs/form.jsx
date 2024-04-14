@@ -27,7 +27,7 @@ export default function Form({ onPrevClick, onNextClick, initialData }) {
       label: "Votre age",
     },
     {
-      name: "numero-telephone",
+      name: "telephone",
       type: "number",
       placeholder: "votre numero de telephone",
       pattern: "05[0-9]{8}|06[0-9]{8}|07[0-9]{8}", // Regex pattern to match the phone number format
@@ -40,7 +40,7 @@ export default function Form({ onPrevClick, onNextClick, initialData }) {
       name: "email",
       type: "email",
       placeholder: "votre email",
-      pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}",
+      pattern: ".+",
       errorMessage:"l'émail doit etre de la form de exemple@gmail.com",
       label: "Votre email",
     },
@@ -87,7 +87,7 @@ export default function Form({ onPrevClick, onNextClick, initialData }) {
         const pattern = new RegExp(element.pattern); // Convert pattern string to RegExp
 
         // Check if the input value is empty for required fields (name, age, phone number)
-        if (!value && (element.name === "nom" || element.name === "age" || element.name === "numero-telephone")) {
+        if (!value && (element.name === "nom" || element.name === "age" || element.name === "telephone")) {
             isValid = false;
             newErrors[element.name] = "Ce champ est requis";
         } else if (pattern && !pattern.test(value)) {
@@ -136,7 +136,7 @@ export default function Form({ onPrevClick, onNextClick, initialData }) {
           </div>
           <div className="h-full   flex flex-col justify-start items-start gap-8">
             {form.map((element, index) => (
-             <div key={index} className="grid grid-cols-2 "> {/* Added a div with flex display */}
+             <div key={index} className={` ${errors[element.name] ?"grid grid-cols-2":"block" } `}> {/* Added a div with flex display */}
              <input
                  minLength={element.minLength}
                  maxLength={element.maxLength}
@@ -148,7 +148,7 @@ export default function Form({ onPrevClick, onNextClick, initialData }) {
                  onChange={(e) => handleInputChange(index, e.target.value)}
              />
              {errors[element.name] && ( // Render the error message conditionally
-                 <span className="text-red-500 text-nowrap text-xs  font-normal">{errors[element.name]}</span>
+                 <span className="text-red-500 text-wrap text-xs  font-normal"><span className="font-bold">X</span>  {errors[element.name]}</span>
              )}
          </div>
             ))}

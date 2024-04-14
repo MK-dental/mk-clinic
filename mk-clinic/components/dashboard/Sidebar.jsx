@@ -53,7 +53,7 @@ export default function Sidebar() {
 
   return (
     <div>
-      <div className="flex flex-row ">
+      <div className="flex flex-row lg:hidden">
       <button
           id="menuButton"
           className="lg:hidden  mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded"
@@ -133,8 +133,8 @@ export default function Sidebar() {
                     </Link>
                   </div>
                 </li>
-                <li>
-                  <div className="text-base text-gray-900 font-normal rounded-lg flex items-center px-2 py-4 border-b  hover:bg-gray-100 group">
+                <li >
+                  <div className="text-lg text-[#10217D] font-normal rounded-lg flex items-center px-2 py-4 border-b  hover:bg-gray-100 group">
                     <RiUserFill />
                     <span className="ml-3 text-sm font-semibold">
                       {useremail}

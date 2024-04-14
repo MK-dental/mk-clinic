@@ -3,17 +3,18 @@ import Sidebar from '../dashboard/Sidebar'
 
 export const Adminlayout = ({ children}) => {
   return (
-    <div className="flex flex-col overflow-hidden bg-white ">
+    <div className="h-screen  flex flex-col overflow-hidden bg-white lg:bg-gray-50 ">
         <Sidebar ></Sidebar>
-          <div className="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
+        
           <div id="main-content" className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
              <main>
-                <div className="pt-6 px-4">
+                <div className="p-4">
+                  <h1 className='font-bold text-xl mb-6'>Tableau De Bord</h1>
                 { children }
         </div>
         </main>
         </div>
-        <footer className="bg-white md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4  lg:ml-64">
+        {/* <footer className="bg-white md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4  lg:ml-64">
                 <ul className="flex items-center flex-wrap mb-6 md:mb-0">
                    <li><a href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Terms and conditions</a></li>
                    <li><a href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Privacy Policy</a></li>
@@ -48,7 +49,7 @@ export const Adminlayout = ({ children}) => {
                       </svg>
                    </a>
                 </div>
-             </footer>
+             </footer> */}
              <p className="text-center text-sm text-gray-500 my-10">
                 &copy; 2019-2021 <a href="#" className="hover:underline" target="_blank">Themesberg</a>. All rights reserved.
              </p>
