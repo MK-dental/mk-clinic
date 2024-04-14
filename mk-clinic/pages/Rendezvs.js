@@ -12,44 +12,46 @@ export default function Rendezvspage() {
   const [userData, setUserData] = useState({});
   const [insertedId, setInsertedId] = useState(null);
   const [loading, setLoading] = useState(false);
-  
+  const supabase = createClient();
   const SendInfo = async (info) => {
+    if (!info) {
+      console.error('Error: No data provided for insertion');
+      return;
+    }
+  
     try {
       setLoading(true);
-      const supabase = createClient();
+  
       const { data: insertData, error: insertError } = await supabase
         .from('rendezvs')
         .insert(info);
-
+  
       if (insertError) {
         console.error('Error inserting data:', insertError.message);
         return;
       }
-
-      const insertedId = insertData[0]?.id;
-      setInsertedId(insertedId);
-      console.log('Data inserted with id:', insertedId);
-
-      const { data: selectData, error: selectError } = await supabase
-        .from('rendezvs')
-        .select(insertedId);
-
-      if (selectError) {
-        console.error('Error selecting data:', selectError.message);
-        return;
+  
+      if (insertData) {
+        const insertedId = insertData[0].id;
+        setInsertedId(insertedId);
+        console.log('Data inserted successfully with ID:', insertedId);
+        // Handle successful insertion, if needed
+      } else {
+        console.error('No data returned after insertion');
       }
-
-      console.log('Selected data:', selectData);
     } catch (error) {
       console.error('Error:', error.message);
     } finally {
       setLoading(false);
     }
-    
-  }
+  };
+ 
+ 
+
 
   const handleNextClick = (data) => {
     setUserData(prevData => ({ ...prevData, ...data }));
+    console.log('User:', userData);
     setStep(step + 1);
   }
 
@@ -64,9 +66,8 @@ export default function Rendezvspage() {
     setStep(step + 1);
   };
 
-  useEffect(() => {
-    console.log("User data updated:", userData);
-  }, [userData]);
+ // Empty dependency array to run the effect only once when the component mounts
+  
 
   return (
     <div className="h-screen mt-20 w-full flex flex-col items-center justify-center">

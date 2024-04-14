@@ -15,7 +15,7 @@ export default function Signin(){
         if (error) {
           console.error(error)
         }
-        router.push('/Dashboard')
+        router.push('/today')
       }
     return (
 <div className="flex items-center min-h-screen bg-white dark:bg-gray-900">

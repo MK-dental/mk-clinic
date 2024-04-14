@@ -11,6 +11,8 @@ const Date = ({onConfirmClick,initialData,onPrevClick}) => {
   const [isWatchOpen, setIsWatchOpen] = useState(false);
   const [Appointment,setAppointment]=useState(false)
   const supabase=createClient();
+
+
   useEffect(() => {
     const calendarEl = document.querySelector('.fc-daygrid');
     const openModal = () => {
@@ -42,6 +44,37 @@ const Date = ({onConfirmClick,initialData,onPrevClick}) => {
       }
     };
   }, []);
+ // Check if the selected date is valid
+ const isValidDate = (dateStr) => {
+  const today = new window.Date();
+  const selectedDate = new window.Date(dateStr);
+  
+  // Check if the selected date is today or in the future
+  const isTodayOrFuture = selectedDate >= today;
+  
+  // Check if the selected date is not a Friday
+  const isNotFriday = selectedDate.getDay() !== 5; // 5 represents Friday
+  
+  // Check if the selected date is in the same month as today
+  const isInSameMonth = selectedDate.getMonth() === today.getMonth();
+  
+  // Return true if all conditions are met
+  return isTodayOrFuture && isNotFriday && isInSameMonth;
+};
+const isValidTime = (timeStr) => {
+  // Parse the time string and create a Date object
+  const selectedTime = new window.Date(`2000-01-01T${timeStr}`);
+  
+  // Create Date objects for lower and upper bounds
+  const lowerBound = new window.Date(`2000-01-01T08:00:00`);
+  const upperBound = new window.Date(`2000-01-01T16:30:00`);
+  
+  // Check if selected time is within the bounds and minutes are either 00 or 30
+  return selectedTime >= lowerBound && 
+         selectedTime <= upperBound &&
+         (selectedTime.getMinutes() === 0 || selectedTime.getMinutes() === 30);
+};
+
 
  
   const closeModal = () => {
@@ -49,9 +82,20 @@ const Date = ({onConfirmClick,initialData,onPrevClick}) => {
   };
 
   const handleTimeChange = (time) => {
+    if (!isValidTime(time)) {
+      alert("S'il vous plait choisi un temps entre 8:30 AM and 4:00 PM et les minutes doit etre soit 00 ou 30.");
+      setSelectedTime(null);
+      return;
+    }
     setSelectedTime(time);
   };
   const handleChange = async () => {
+   if (!isValidDate(selectedDate)){
+    console.log(`Invalid reservation in the past`);
+    alert("Essayez de réserver un rendez vous dans les jours qui suivent aujourd'hui s'il vous plait et ne choisissez pas le vendredi ");
+   setSelectedDate(null)
+   setSelectedTime(null)
+   }else{
     try {
       
       const { data, error } = await supabase
@@ -82,10 +126,11 @@ const Date = ({onConfirmClick,initialData,onPrevClick}) => {
         setAppointment(false);
         onConfirmClick(Data);
       }
-      
+    
     } catch (error) {
       console.error('Error:', error.message);
     }
+  }
   };
 
   return (
